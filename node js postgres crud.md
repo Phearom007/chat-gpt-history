@@ -37,7 +37,8 @@ Set up a PostgreSQL database and create a table with columns that match the data
 </li>
 Connect to the database using the `pg` module:
 </li></ol>
-```
+
+```js
 const { Pool } = require('pg');
 const pool = new Pool({
   user: 'your_username',
@@ -52,7 +53,7 @@ const pool = new Pool({
 - Create:
 
 
-```
+```js
 async function create(data) {
   const { name, email } = data;
   const query = 'INSERT INTO users (name, email) VALUES ($1, $2) RETURNING *';
@@ -66,7 +67,7 @@ async function create(data) {
 - Read:
 
 
-```
+```js
 async function findById(id) {
   const query = 'SELECT * FROM users WHERE id = $1';
   const values = [id];
@@ -85,7 +86,7 @@ async function findAll() {
 - Update:
 
 
-```
+```js
 async function update(id, data) {
   const { name, email } = data;
   const query = 'UPDATE users SET name = $1, email = $2 WHERE id = $3 RETURNING *';
@@ -99,7 +100,7 @@ async function update(id, data) {
 - Delete:
 
 
-```
+```js
 async function remove(id) {
   const query = 'DELETE FROM users WHERE id = $1';
   const values = [id];
@@ -122,7 +123,7 @@ write crud function single file
 
 Sure, here's an example of a single-file Node.js application that implements CRUD operations for a PostgreSQL database using the `pg` module:
 
-```
+```js
 const { Pool } = require('pg');
 
 const pool = new Pool({
@@ -216,12 +217,14 @@ Sure, here's an example of how you can apply the CRUD functions for PostgreSQL u
 1. First, create a new Express.js application and install the `pg` module:
 
 
-```
+```js
 npm install express pg
+```
 
-```
 <ol start="2">Create a `db.js` module that exports the `Pool` object:</li></ol>
-```
+
+
+```js
 const { Pool } = require('pg');
 
 const pool = new Pool({
@@ -236,7 +239,8 @@ module.exports = pool;
 
 ```
 <ol start="3">Create a `users.js` module that defines the CRUD functions and exports an Express.js router:</li></ol>
-```
+
+```js
 const express = require('express');
 const pool = require('./db');
 
@@ -313,7 +317,8 @@ module.exports = router;
 
 ```
 <ol start="4">In your main application file, import the `users.js` module and register it as a router:</li></ol>
-```
+
+```js
 const express = require('express');
 const usersRouter = require('./users');
 
@@ -345,7 +350,7 @@ Sure, here's an example of how you can apply the CRUD functions for PostgreSQL w
 1. Create a new table in your PostgreSQL database:
 
 
-```
+```js
 CREATE TABLE posts (
   id SERIAL PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
@@ -360,7 +365,9 @@ CREATE TABLE posts (
 
 ```
 <ol start="2">Create a `db.js` module that exports the `Pool` object:</li></ol>
-```
+
+
+```js
 const { Pool } = require('pg');
 
 const pool = new Pool({
@@ -374,8 +381,13 @@ const pool = new Pool({
 module.exports = pool;
 
 ```
+
+
 <ol start="3">Create a `posts.js` module that defines the CRUD functions and exports an Express.js router:</li></ol>
-```
+
+
+
+```js
 const express = require('express');
 const pool = require('./db');
 
@@ -451,7 +463,7 @@ I'm sorry, but I think there's a misunderstanding here. The HTTP `DELETE` method
 
 If you want to delete a post by its `id`, you can modify the `DELETE` route in the `posts.js` module as follows:
 
-```
+```js
 router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
